@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kev Playground — 선택을 위한 모델</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+<header class="topbar"><a href="/" class="brand"><span class="brand-mark" aria-hidden="true">k</span>kev <span>/ playground</span></a>
+  <div class="top-actions"><span id="connection" role="status"><i></i><span id="connection-text">연결 확인 중</span></span><div class="languages" aria-label="Language"><button type="button" id="lang-ko" aria-pressed="true">한국어</button><button type="button" id="lang-en" aria-pressed="false">EN</button></div></div>
+</header>
+<main>
+  <section class="intro"><h1 data-i18n="heading">문장을 넘어, 선택으로.</h1><p data-i18n="subtitle">상황과 선택지를 입력하고, 모델의 판단을 확인하세요.</p></section>
+  <div id="server-notice" class="notice" role="status" hidden></div>
+  <div class="workspace">
+    <aside class="panel examples-panel"><h2 data-i18n="examples">예제로 시작하기</h2><nav id="examples" aria-label="Examples"></nav><p class="rail-note" data-i18n="examplesNote">검증된 영어 예제입니다. 내용을 바꿔 직접 비교해 보세요.</p></aside>
+    <section class="panel input-panel"><h2 data-i18n="input">입력</h2>
+      <form id="decision-form">
+        <fieldset id="fields">
+          <div class="field"><label for="state" data-i18n="state">상황</label><textarea id="state" name="state" rows="4" maxlength="16000" required></textarea><span class="field-note" data-i18n="stateNote">모델이 판단에 사용할 정보 · 최대 1,024토큰</span></div>
+          <div class="field"><label for="question" data-i18n="question">질문</label><textarea id="question" name="question" rows="2" maxlength="4000" required></textarea></div>
+          <div class="field"><label id="options-label" data-i18n="options">선택지</label><div id="options" aria-labelledby="options-label"></div><button type="button" id="add-option" class="secondary"><span aria-hidden="true">＋</span> <span data-i18n="add">선택지 추가</span></button></div>
+          <button type="submit" id="submit" class="primary"><span id="submit-text">선택 결과 확인</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </fieldset>
+        <p id="error" class="error" role="alert" hidden></p>
+      </form>
+    </section>
+    <section class="panel results-panel" aria-labelledby="result-heading"><h2 id="result-heading" data-i18n="result">모델의 선택</h2>
+      <div id="empty-result" class="empty"><div class="empty-bars" aria-hidden="true"><span></span><span></span><span></span></div><h3 data-i18n="emptyTitle">어떤 선택을 할까요?</h3><p data-i18n="emptyText">입력을 확인하고 실행하면<br>선택지별 확률이 여기에 표시됩니다.</p></div>
+      <div id="result" hidden><div id="probabilities" aria-live="polite"></div><div class="metrics"><span id="request-time"></span><span id="token-count"></span></div></div>
+      <p class="probability-note" data-i18n="probabilityNote">확률은 주어진 선택지 간 상대적인 모델 확률입니다. 정답을 보장하지 않습니다.</p>
+      <div id="response-section" hidden><h3 data-i18n="actual">실제 로컬 모델 응답</h3><details><summary data-i18n="json">JSON 보기</summary><pre id="raw-json"></pre><button type="button" id="copy-json" class="secondary" data-i18n="copy">JSON 복사</button></details></div>
+    </section>
+  </div>
+  <footer><span>Kev × vLLM</span><span data-i18n="footer">로컬 실행 · 텍스트 선택 모델 · 최대 2,048토큰</span><a href="/docs" target="_blank" rel="noopener" data-i18n="api">API 문서</a></footer>
+</main>
+</body></html>

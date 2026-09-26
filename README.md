@@ -9,6 +9,22 @@ The Qwen3.5 backbone and Kev pointer head run inside the vLLM GPU worker;
 the native `/pooling` endpoint returns an `[options, 1]` probability matrix.
 This model selects an option rather than generating chat responses.
 
+## Try the web playground
+
+![Kev Playground: a real local model response](docs/assets/playground-en.png)
+
+After the one-time setup below, **double-click `run_playground.bat`** on Windows.
+It starts the model if needed and opens <http://127.0.0.1:18090>.
+Choose one of five examples, edit the state/question/options, and run a decision.
+The UI supports Korean and English, option probability bars, and copyable response JSON.
+All predictions come from your local model; no cloud API key or Node build is needed.
+
+On Linux: `.venv/bin/python scripts/playground.py --start-model --open`.
+Keep the launcher running; Ctrl+C stops the UI and the model it started.
+An already-running model server is reused and left running.
+
+[Playground guide and API](docs/playground.md) · [Runnable examples](examples/README.md)
+
 ## Tested environments
 
 | Profile | GPU | Python | vLLM | Precision | Model and result directory |

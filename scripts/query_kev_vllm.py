@@ -1,5 +1,6 @@
 """Encode a text question with pinned Kev code and call stock vLLM /pooling."""
 import argparse
+from functools import lru_cache
 import importlib.util
 import json
 import urllib.error
@@ -8,12 +9,18 @@ import urllib.request
 from kev_runtime import AUDIT
 
 
-def encode_request(state, question, options):
+@lru_cache(maxsize=1)
+def load_encoder():
     from transformers import AutoTokenizer
     spec = importlib.util.spec_from_file_location("kev_encoder", AUDIT / "kev-source/model.py")
     encoder = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(encoder)
     tokenizer = AutoTokenizer.from_pretrained(AUDIT / "merged-text", local_files_only=True)
+    return encoder, tokenizer
+
+
+def encode_request(state, question, options):
+    encoder, tokenizer = load_encoder()
     record = {"state": state, "questions": [{"instr": question, "options": options, "label": 0}]}
     # label is unused by inference; the upstream encoder requires the field.
     encoded = encoder.encode(tokenizer, record, max_state=1024, max_branch=2048, strict=True)

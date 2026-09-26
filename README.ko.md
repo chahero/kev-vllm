@@ -6,6 +6,22 @@
 
 상황, 질문, 선택지를 입력하면 각 선택지의 확률을 반환합니다. Qwen3.5 백본과 Kev의 pointer head가 vLLM GPU 워커 안에서 실행되며, 기본 `/pooling` API는 `[선택지 수, 1]` 형태의 확률 행렬을 반환합니다. 채팅 응답을 생성하는 모델이 아니라 주어진 선택지 중 하나를 고르는 모델입니다.
 
+## 웹 화면으로 체험하기
+
+![Kev Playground 실제 로컬 모델 실행 화면](docs/assets/playground-ko.png)
+
+아래 최초 설치를 마쳤다면 **`run_playground.bat`를 더블클릭**하세요.
+필요하면 모델 서버를 시작하고 <http://127.0.0.1:18090> 화면을 엽니다.
+예제 5개 중 하나를 선택하고 상황·질문·선택지를 수정한 뒤 실행하면 됩니다.
+한국어·영어 전환, 선택지별 확률 그래프, 응답 JSON 복사를 지원합니다.
+결과는 실제 로컬 모델에서 가져오며, 클라우드 API 키나 Node 빌드가 필요하지 않습니다.
+
+Linux에서는 `.venv/bin/python scripts/playground.py --start-model --open`으로 실행합니다.
+실행 창을 유지하고, 종료할 때 Ctrl+C를 누르세요. UI가 시작한 모델은 함께 종료합니다.
+이미 실행 중이던 모델 서버는 재사용하며 종료하지 않습니다.
+
+[화면 사용법과 API](docs/playground.md) · [실행 가능한 예제](examples/README.md)
+
 ## 검증한 실행 환경
 
 | 환경 | GPU | Python | vLLM | 정밀도 | 모델·결과 저장 경로 |
