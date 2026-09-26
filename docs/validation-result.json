@@ -1,0 +1,573 @@
+{
+  "passed": true,
+  "tolerance": 0.02,
+  "rows": [
+    {
+      "name": "original-0",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.9965178966522217,
+        0.0032408847473561764,
+        0.00024119122826959938
+      ],
+      "vllm": [
+        0.9965963959693909,
+        0.00316074350848794,
+        0.00024286455300170928
+      ],
+      "max_abs_probability_error": 8.014123886823654e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0,
+      "reference_question_independence_error": 5.030632019042969e-05
+    },
+    {
+      "name": "original-0",
+      "question": 1,
+      "tokens": 27,
+      "reference": [
+        0.002317495411261916,
+        0.9976824522018433
+      ],
+      "vllm": [
+        0.0024463313166052103,
+        0.9975536465644836
+      ],
+      "max_abs_probability_error": 0.00012883590534329414,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 5.7286350056529045e-05,
+      "reference_question_independence_error": 9.863614104688168e-05
+    },
+    {
+      "name": "original-1",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.0003136456070933491,
+        0.003105600830167532,
+        0.9965807795524597
+      ],
+      "vllm": [
+        0.0003203870728611946,
+        0.0031547783873975277,
+        0.9965248703956604
+      ],
+      "max_abs_probability_error": 5.5909156799316406e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 3.8887374103069305e-05,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "original-2",
+      "question": 0,
+      "tokens": 38,
+      "reference": [
+        0.0034233741462230682,
+        0.9965766072273254
+      ],
+      "vllm": [
+        0.0033371164463460445,
+        0.9966629147529602
+      ],
+      "max_abs_probability_error": 8.630752563476562e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 1.8116086721420288e-05,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "original-3",
+      "question": 0,
+      "tokens": 39,
+      "reference": [
+        0.0172591470181942,
+        0.024723883718252182,
+        0.026416797190904617,
+        0.9316000938415527
+      ],
+      "vllm": [
+        0.01727568730711937,
+        0.02530478686094284,
+        0.025766946375370026,
+        0.9316526651382446
+      ],
+      "max_abs_probability_error": 0.002177715301513672,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0021251440048217773,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "permutation-0",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.9964675903320312,
+        0.0032662409357726574,
+        0.0002662058104760945
+      ],
+      "vllm": [
+        0.9966182112693787,
+        0.003141155233606696,
+        0.00024075426335912198
+      ],
+      "max_abs_probability_error": 0.0001506209373474121,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 2.181529998779297e-05,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "permutation-1",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.9968550205230713,
+        0.00042803966789506376,
+        0.002716940362006426
+      ],
+      "vllm": [
+        0.9969990253448486,
+        0.00040267224540002644,
+        0.0025983320083469152
+      ],
+      "max_abs_probability_error": 0.00014400482177734375,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.00011813268065452576,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "permutation-2",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.0023068345617502928,
+        0.9973098039627075,
+        0.0003833275695797056
+      ],
+      "vllm": [
+        0.002243081573396921,
+        0.9974002838134766,
+        0.00035662282607518137
+      ],
+      "max_abs_probability_error": 9.047985076904297e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 8.016824722290039e-05,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "permutation-3",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.002640009857714176,
+        0.0003438555868342519,
+        0.997016191482544
+      ],
+      "vllm": [
+        0.002573268720880151,
+        0.0003145118535030633,
+        0.9971121549606323
+      ],
+      "max_abs_probability_error": 9.59634780883789e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 3.7670135498046875e-05,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "permutation-4",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.00028569306596182287,
+        0.9955956339836121,
+        0.004118733573704958
+      ],
+      "vllm": [
+        0.00029043431277386844,
+        0.9956450462341309,
+        0.004064567852765322
+      ],
+      "max_abs_probability_error": 6.56559132039547e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 1.1490192264318466e-05,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "permutation-5",
+      "question": 0,
+      "tokens": 33,
+      "reference": [
+        0.0003136456070933491,
+        0.003105600830167532,
+        0.9965807795524597
+      ],
+      "vllm": [
+        0.00032275193370878696,
+        0.0031158910132944584,
+        0.9965613484382629
+      ],
+      "max_abs_probability_error": 1.9431114196777344e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "questions-reversed",
+      "question": 0,
+      "tokens": 27,
+      "reference": [
+        0.002317495411261916,
+        0.9976824522018433
+      ],
+      "vllm": [
+        0.0024463313166052103,
+        0.9975536465644836
+      ],
+      "max_abs_probability_error": 0.00012883590534329414,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 5.7286350056529045e-05,
+      "reference_question_independence_error": 9.863614104688168e-05
+    },
+    {
+      "name": "questions-reversed",
+      "question": 1,
+      "tokens": 33,
+      "reference": [
+        0.9965178966522217,
+        0.0032408847473561764,
+        0.00024119122826959938
+      ],
+      "vllm": [
+        0.9965963959693909,
+        0.00316074350848794,
+        0.00024286455300170928
+      ],
+      "max_abs_probability_error": 8.014123886823654e-05,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0,
+      "reference_question_independence_error": 5.030632019042969e-05
+    },
+    {
+      "name": "options-2",
+      "question": 0,
+      "tokens": 20,
+      "reference": [
+        0.9848800897598267,
+        0.015119939111173153
+      ],
+      "vllm": [
+        0.9849115610122681,
+        0.015088386833667755
+      ],
+      "max_abs_probability_error": 0.00017064251005649567,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.00013911724090576172,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "options-5",
+      "question": 0,
+      "tokens": 29,
+      "reference": [
+        0.9518178701400757,
+        0.01587004028260708,
+        0.010980406776070595,
+        0.010649957694113255,
+        0.010681713931262493
+      ],
+      "vllm": [
+        0.9494903683662415,
+        0.016502728685736656,
+        0.011579107493162155,
+        0.011191844008862972,
+        0.011236006394028664
+      ],
+      "max_abs_probability_error": 0.0023275017738342285,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0020070672035217285,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "options-8",
+      "question": 0,
+      "tokens": 38,
+      "reference": [
+        0.922606348991394,
+        0.015578167513012886,
+        0.010838423855602741,
+        0.010405262932181358,
+        0.01047455333173275,
+        0.013449585996568203,
+        0.00890134833753109,
+        0.007746310904622078
+      ],
+      "vllm": [
+        0.921613872051239,
+        0.015666576102375984,
+        0.01093242783099413,
+        0.010536308400332928,
+        0.010568864643573761,
+        0.013289070688188076,
+        0.009723308496177197,
+        0.007669582962989807
+      ],
+      "max_abs_probability_error": 0.0009924769401550293,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0012493729591369629,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "literal-control-tokens",
+      "question": 0,
+      "tokens": 117,
+      "reference": [
+        0.7320045828819275,
+        0.2679953873157501
+      ],
+      "vllm": [
+        0.7333157658576965,
+        0.2666842043399811
+      ],
+      "max_abs_probability_error": 0.001311182975769043,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.00039464235305786133,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-32-start",
+      "question": 0,
+      "tokens": 125,
+      "reference": [
+        0.012391776777803898,
+        0.022790923714637756,
+        0.9036341905593872,
+        0.06118316575884819
+      ],
+      "vllm": [
+        0.012214087881147861,
+        0.023019956424832344,
+        0.9035832285881042,
+        0.061182718724012375
+      ],
+      "max_abs_probability_error": 0.0004444606602191925,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0002422928810119629,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-32-middle",
+      "question": 0,
+      "tokens": 126,
+      "reference": [
+        0.03022586740553379,
+        0.047962870448827744,
+        0.810389518737793,
+        0.11142175644636154
+      ],
+      "vllm": [
+        0.029009979218244553,
+        0.04642055556178093,
+        0.8184530735015869,
+        0.10611643642187119
+      ],
+      "max_abs_probability_error": 0.008063554763793945,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0037170052528381348,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-32-end",
+      "question": 0,
+      "tokens": 126,
+      "reference": [
+        0.018996108323335648,
+        0.03371734172105789,
+        0.8736547827720642,
+        0.07363168150186539
+      ],
+      "vllm": [
+        0.019081398844718933,
+        0.03374690189957619,
+        0.8729425072669983,
+        0.07422918826341629
+      ],
+      "max_abs_probability_error": 0.002238750457763672,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.001526474952697754,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-128-start",
+      "question": 0,
+      "tokens": 413,
+      "reference": [
+        0.01587323099374771,
+        0.02891695313155651,
+        0.8802279829978943,
+        0.07498173415660858
+      ],
+      "vllm": [
+        0.016237828880548477,
+        0.029678741469979286,
+        0.8781063556671143,
+        0.07597710192203522
+      ],
+      "max_abs_probability_error": 0.0021216273307800293,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.001363992691040039,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-128-middle",
+      "question": 0,
+      "tokens": 414,
+      "reference": [
+        0.041665103286504745,
+        0.06494321674108505,
+        0.7755760550498962,
+        0.11781556904315948
+      ],
+      "vllm": [
+        0.04258229210972786,
+        0.06602782011032104,
+        0.7699453234672546,
+        0.12144460529088974
+      ],
+      "max_abs_probability_error": 0.006242275238037109,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0009113699197769165,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-128-end",
+      "question": 0,
+      "tokens": 414,
+      "reference": [
+        0.03182126581668854,
+        0.048746876418590546,
+        0.8171434998512268,
+        0.1022883728146553
+      ],
+      "vllm": [
+        0.031038209795951843,
+        0.04775041341781616,
+        0.8192317485809326,
+        0.10197962075471878
+      ],
+      "max_abs_probability_error": 0.0064795613288879395,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.004391312599182129,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-300-start",
+      "question": 0,
+      "tokens": 929,
+      "reference": [
+        0.020757950842380524,
+        0.035804152488708496,
+        0.8582184314727783,
+        0.08521950989961624
+      ],
+      "vllm": [
+        0.020115848630666733,
+        0.03409654274582863,
+        0.8646044135093689,
+        0.08118324726819992
+      ],
+      "max_abs_probability_error": 0.006385982036590576,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-300-middle",
+      "question": 0,
+      "tokens": 930,
+      "reference": [
+        0.06072302907705307,
+        0.0966213047504425,
+        0.7000077962875366,
+        0.14264783263206482
+      ],
+      "vllm": [
+        0.059237126260995865,
+        0.09661637246608734,
+        0.7039968967437744,
+        0.14014962315559387
+      ],
+      "max_abs_probability_error": 0.0073326826095581055,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0033435821533203125,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "long-300-end",
+      "question": 0,
+      "tokens": 930,
+      "reference": [
+        0.04769309237599373,
+        0.06860872358083725,
+        0.7634450197219849,
+        0.12025314569473267
+      ],
+      "vllm": [
+        0.04740506410598755,
+        0.06815320998430252,
+        0.7635371685028076,
+        0.1209045872092247
+      ],
+      "max_abs_probability_error": 0.0011452436447143555,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0012098997831344604,
+      "reference_question_independence_error": 0.0
+    },
+    {
+      "name": "row-limit-2048",
+      "question": 0,
+      "tokens": 2048,
+      "reference": [
+        0.9850104451179504,
+        0.014989550225436687
+      ],
+      "vllm": [
+        0.9851959943771362,
+        0.014803958125412464
+      ],
+      "max_abs_probability_error": 0.00018559210002422333,
+      "same_argmax": true,
+      "batch_order_error": 0.0,
+      "batch_singleton_error": 0.0,
+      "reference_question_independence_error": 0.0
+    }
+  ],
+  "rejected": [
+    "state-overflow",
+    "row-overflow"
+  ],
+  "scope": "Text BF16 merged parity; no accuracy, calibration, image, or throughput claim"
+}
