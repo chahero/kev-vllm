@@ -8,27 +8,19 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "artifacts/vllm-audit"
+from kev_runtime import ROOT, AUDIT, server_command
 
 
 def main():
     base = "http://127.0.0.1:18089"
     reference = json.loads((AUDIT / "reference.json").read_text())
-    cmd = [str(ROOT / ".venv-vllm/bin/vllm"), "serve", str(AUDIT / "merged-text"),
-           "--served-model-name", "kev-4b-experimental", "--host", "127.0.0.1", "--port", "18089",
-           "--runner", "pooling", "--dtype", "bfloat16", "--enforce-eager",
-           "--max-model-len", "2048", "--max-num-seqs", "2", "--max-num-batched-tokens", "2048",
-           "--gpu-memory-utilization", "0.18", "--no-enable-prefix-caching", "--no-enable-chunked-prefill",
-           "--pooler-config", json.dumps({"task": "token_embed", "use_activation": False}),
-           "--attention-config", json.dumps({"backend": "TRITON_ATTN"})]
+    cmd = server_command()
     env = dict(os.environ, HF_HUB_OFFLINE="1", VLLM_NO_USAGE_STATS="1", OMP_NUM_THREADS="4")
     with (AUDIT / "http-server.log").open("w") as log:
-        process = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+        process = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=(os.name != "nt"))
         try:
-            deadline = time.monotonic() + 300
+            deadline = time.monotonic() + 900
             while time.monotonic() < deadline:
                 if process.poll() is not None:
                     raise RuntimeError(f"vllm serve exited {process.returncode}; see http-server.log")
@@ -40,7 +32,7 @@ def main():
                     pass
                 time.sleep(1)
             else:
-                raise TimeoutError("vllm serve startup exceeded 300 seconds")
+                raise TimeoutError("vllm serve startup exceeded 900 seconds")
             with urllib.request.urlopen(base + "/v1/models") as r:
                 models = json.load(r)
             body = {"model": "kev-4b-experimental", "task": "token_embed",
@@ -75,11 +67,11 @@ def main():
                 raise SystemExit(1)
         finally:
             if process.poll() is None:
-                os.killpg(process.pid, signal.SIGTERM)
+                subprocess.run(["taskkill", "/PID", str(process.pid), "/T", "/F"], capture_output=True) if os.name == "nt" else os.killpg(process.pid, signal.SIGTERM)
                 try:
                     process.wait(timeout=30)
                 except subprocess.TimeoutExpired:
-                    os.killpg(process.pid, signal.SIGKILL)
+                    process.kill() if os.name == "nt" else os.killpg(process.pid, signal.SIGKILL)
                     process.wait()
 
 

@@ -8,6 +8,7 @@ import subprocess
 import sys
 
 from prepare_kev_vllm import AUDIT, base_path, load_pinned_kev
+from kev_runtime import DTYPE, engine_options
 
 REFERENCE = AUDIT / "expanded-reference.json"
 REPORT = AUDIT / "expanded-result.json"
@@ -78,7 +79,7 @@ def reference_phase():
     base = base_path()
     assert ck.meta.base_revision == base.name
     ck.meta.base = str(base)
-    tok, model = ck.load("cuda", ckmod.LoadOptions(dtype=torch.bfloat16, merge=True, cuda_graphs=False))
+    tok, model = ck.load("cuda", ckmod.LoadOptions(dtype=getattr(torch, DTYPE), merge=True, cuda_graphs=False))
     rows = []
     for name, case in cases:
         enc = encode(km, tok, case)
@@ -102,11 +103,7 @@ def vllm_phase():
     import torch
     from vllm import LLM, PoolingParams
     reference = json.loads(REFERENCE.read_text())
-    model = LLM(model=str(AUDIT / "merged-text"), runner="pooling", dtype="bfloat16", enforce_eager=True,
-                max_model_len=2048, max_num_seqs=2, max_num_batched_tokens=2048, gpu_memory_utilization=0.18,
-                enable_prefix_caching=False, enable_chunked_prefill=False,
-                pooler_config={"task": "token_embed", "use_activation": False},
-                attention_config={"backend": "TRITON_ATTN"})
+    model = LLM(**engine_options())
     def run(rows):
         outputs = model.encode([{"prompt_token_ids": row["input_ids"]} for row in rows],
                                pooling_task="token_embed", pooling_params=PoolingParams(task="token_embed"), use_tqdm=False)
@@ -138,7 +135,7 @@ def vllm_phase():
         print(json.dumps(result), flush=True)
     passed = all(r["same_argmax"] and max(r[k] for k in ("max_abs_probability_error", "batch_order_error", "batch_singleton_error", "reference_question_independence_error")) < TOLERANCE for r in results)
     report = {"passed": passed, "tolerance": TOLERANCE, "rows": results, "rejected": reference["rejected"],
-              "scope": "Text BF16 merged parity; no accuracy, calibration, image, or throughput claim"}
+              "scope": f"Text {DTYPE} merged parity; no accuracy, calibration, image, or throughput claim"}
     REPORT.write_text(json.dumps(report, indent=2))
     print("PASS" if passed else "FAIL", "rows", len(rows), flush=True)
     if not passed:

@@ -1,4 +1,9 @@
-# Kev-4B on vLLM — isolated text experiment
+# Original Linux / GB10 experiment
+
+This document records the original Linux BF16 experiment. See the
+[README](../README.md) for current entry points and the [Windows guide](windows.md)
+for the separate native Windows FP16 validation. Current commands use `.venv`;
+the original workspace environment was named `.venv-vllm`.
 
 This experiment runs the Qwen3.5 backbone and Kev pointer head **inside vLLM's
 GPU worker**, using an out-of-tree model plugin. It does not proxy requests to
@@ -64,7 +69,7 @@ In another terminal:
 
 ```bash
 cd /path/to/kev-vllm
-.venv-vllm/bin/python scripts/query_kev_vllm.py \
+.venv/bin/python scripts/query_kev_vllm.py \
   --state "The package arrived broken. The customer requests a refund." \
   --question "What does the customer want?" \
   --options "A refund" "Tracking information" "A new password"
@@ -82,16 +87,16 @@ from this repository root (downloads the pinned source, adapter, and base):
 bash scripts/setup_kev_vllm.sh
 
 # Check prepared model inputs without downloading:
-.venv-vllm/bin/python scripts/fetch_kev_inputs.py --offline
+.venv/bin/python scripts/fetch_kev_inputs.py --offline
 
 HF_HUB_OFFLINE=1 VLLM_NO_USAGE_STATS=1 OMP_NUM_THREADS=4 \
-  .venv-vllm/bin/python scripts/test_kev_vllm.py
+  .venv/bin/python scripts/test_kev_vllm.py
 
 # Expanded reference and vLLM comparison, sequential GPU processes:
-.venv-vllm/bin/python scripts/validate_kev_vllm.py
+.venv/bin/python scripts/validate_kev_vllm.py
 
 # Starts stock vllm serve on 127.0.0.1:18089, checks it, then shuts it down:
-.venv-vllm/bin/python scripts/test_kev_vllm_http.py
+.venv/bin/python scripts/test_kev_vllm_http.py
 ```
 
 The setup script resolves the base snapshot in the current HF cache and writes

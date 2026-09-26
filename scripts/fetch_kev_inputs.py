@@ -5,8 +5,7 @@ import json
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "artifacts/vllm-audit"
+from kev_runtime import ROOT, AUDIT
 BASE_REPO = "Qwen/Qwen3.5-4B-Base"
 BASE_REV = "1001bb4d826a52d1f399e183466143f4da7b741b"
 KEV_REV = "139fdd94f1b6a6ad80cc15e08fcb99cac885a101"
@@ -52,7 +51,7 @@ def main():
     hashes = {}
     for path in files:
         with path.open("rb") as file:
-            hashes[str(path.relative_to(ROOT))] = hashlib.file_digest(file, "sha256").hexdigest()
+            hashes[path.relative_to(ROOT).as_posix()] = hashlib.file_digest(file, "sha256").hexdigest()
     manifest_path = AUDIT / "inputs.json"
     if manifest_path.exists():
         previous = json.loads(manifest_path.read_text())

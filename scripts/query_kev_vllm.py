@@ -4,10 +4,8 @@ import importlib.util
 import json
 import urllib.error
 import urllib.request
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "artifacts/vllm-audit"
+from kev_runtime import AUDIT
 
 
 def encode_request(state, question, options):

@@ -11,8 +11,7 @@ from pathlib import Path
 import torch
 from safetensors.torch import save_file
 
-ROOT = Path(__file__).resolve().parents[1]
-AUDIT = ROOT / "artifacts/vllm-audit"
+from kev_runtime import ROOT, AUDIT, DTYPE
 BASE = Path.home() / ".cache/huggingface/hub/models--Qwen--Qwen3.5-4B-Base/snapshots/1001bb4d826a52d1f399e183466143f4da7b741b"
 
 
@@ -44,8 +43,8 @@ def main():
     base = base_path()
     assert ck.meta.base_revision == base.name
     ck.meta.base = str(base)
-    print("Loading pinned reference Kev (BF16, merged, no cache)", flush=True)
-    tok, model = ck.load("cuda", ckmod.LoadOptions(dtype=torch.bfloat16, merge=True, cuda_graphs=False))
+    print(f"Loading pinned reference Kev ({DTYPE}, merged, no cache)", flush=True)
+    tok, model = ck.load("cuda", ckmod.LoadOptions(dtype=getattr(torch, DTYPE), merge=True, cuda_graphs=False))
     cases = [
         {"state": "The package arrived broken. The customer requests a refund.", "questions": [
             {"instr": "What does the customer want?", "options": ["A refund", "Tracking information", "A new password"], "label": 0},
@@ -75,7 +74,7 @@ def main():
                          "probabilities": probs, "logits": z.float().cpu().tolist(),
                          "expected_label": case["questions"][question_idx]["label"]})
         print("Reference case", case_idx, probabilities, "seconds", time.perf_counter()-started, flush=True)
-    (AUDIT / "reference.json").write_text(json.dumps({"cases": cases, "rows": rows, "temperature": model.head.temperature, "dtype": "bf16", "merge": True}, indent=2))
+    (AUDIT / "reference.json").write_text(json.dumps({"cases": cases, "rows": rows, "temperature": model.head.temperature, "dtype": DTYPE, "merge": True}, indent=2))
     out.mkdir(exist_ok=True)
     config = model.lm.config.to_dict()
     config["architectures"] = ["KevQwen3_5ForPooling"]
@@ -95,7 +94,7 @@ def main():
     with (AUDIT / "kev-checkpoint/adapter_model.safetensors").open("rb") as f:
         adapter_hash = hashlib.file_digest(f, "sha256").hexdigest()
     completed.write_text(json.dumps({"base_revision": base.name, "adapter_sha256": adapter_hash,
-                                    "dtype": "bfloat16", "merge": True, "tensor_count": len(weights)}, indent=2))
+                                    "dtype": DTYPE, "merge": True, "tensor_count": len(weights)}, indent=2))
     print("Saved", out, "tensors", len(weights), flush=True)
 
 

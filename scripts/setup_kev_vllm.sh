@@ -3,17 +3,17 @@
 set -euo pipefail
 KEV_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$KEV_ROOT"
-if [[ ! -x .venv-vllm/bin/python ]]; then
-  uv venv --python 3.12 .venv-vllm
+if [[ ! -x .venv/bin/python ]]; then
+  uv venv --python 3.12 .venv
 fi
-uv pip install --python .venv-vllm/bin/python --torch-backend=cu130 \
+uv pip install --python .venv/bin/python --torch-backend=cu130 \
   torch==2.13.0 vllm==0.30.0 transformers==5.17.0 peft==0.21.0
-uv pip install --python .venv-vllm/bin/python --no-deps -e .
-.venv-vllm/bin/python scripts/fetch_kev_inputs.py "$@"
+uv pip install --python .venv/bin/python --no-deps -e .
+.venv/bin/python scripts/fetch_kev_inputs.py "$@"
 if [[ ! -f artifacts/vllm-audit/merged-text/export-manifest.json ]]; then
-  HF_HUB_OFFLINE=1 .venv-vllm/bin/python scripts/prepare_kev_vllm.py
+  HF_HUB_OFFLINE=1 .venv/bin/python scripts/prepare_kev_vllm.py
 fi
-.venv-vllm/bin/python - <<'PY'
+.venv/bin/python - <<'PY'
 import json
 from pathlib import Path
 audit = Path('artifacts/vllm-audit')

@@ -1,0 +1,6 @@
+# Community native Windows wheel, Python 3.13 / CUDA 13.0, SM 7.5 included.
+# Upstream source: https://github.com/aivrar/vllm-windows-build/tree/v0.29.0-win-cu130-rc1
+https://github.com/aivrar/vllm-windows-build/releases/download/v0.29.0-win-cu130-rc1/vllm-0.29.0-cp313-cp313-win_amd64.whl#sha256=8c15e0a873b970a2163dd66708e6f33f946f91651eeee717791c9d2981ebaf3b
+triton-windows==3.7.1.post27
+transformers==5.17.0
+peft==0.21.0

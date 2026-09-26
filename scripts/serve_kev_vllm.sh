@@ -4,7 +4,7 @@ KEV_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 export HF_HUB_OFFLINE=1
 export VLLM_NO_USAGE_STATS=1
 export OMP_NUM_THREADS=4
-exec "$KEV_ROOT/.venv-vllm/bin/vllm" serve "$KEV_ROOT/artifacts/vllm-audit/merged-text" \
+exec "$KEV_ROOT/.venv/bin/vllm" serve "$KEV_ROOT/artifacts/vllm-audit/merged-text" \
   --served-model-name kev-4b-experimental \
   --host 127.0.0.1 --port 18089 \
   --runner pooling --dtype bfloat16 --enforce-eager \

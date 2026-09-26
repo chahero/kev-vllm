@@ -7,7 +7,11 @@ name = "kev-vllm"
 version = "0.1.0"
 description = "Experimental text-only Kev pointer model for vLLM 0.30.0"
 requires-python = ">=3.12"
-dependencies = ["vllm==0.30.0", "transformers==5.17.0"]
+dependencies = [
+    "vllm==0.30.0; sys_platform != 'win32'",
+    "vllm==0.29.0; sys_platform == 'win32'",
+    "transformers==5.17.0",
+]
 
 [project.entry-points."vllm.general_plugins"]
 kev_pointer = "kev_vllm:register"
